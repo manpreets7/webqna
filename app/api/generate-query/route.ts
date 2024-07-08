@@ -22,14 +22,11 @@ async function getSearchQuery(question: string) {
     ]
   });
 
-  if (Array.isArray(msg.content) && msg.content.length > 0) {
-    const firstContent = msg.content[0];
-    if ('text' in firstContent) {
-      return firstContent.text;
-    }
+  if (Array.isArray(msg.content) && msg.content.length > 0 && 'text' in msg.content[0]) {
+    return msg.content[0].text.trim();
   }
   
-  throw new Error("Unable to get search query from AI response");
+  return "";
 }
 
 async function braveWebSearch(query: string) {
@@ -45,14 +42,14 @@ async function braveWebSearch(query: string) {
 }
 
 export async function POST(request: Request) {
-  const { question } = await request.json();
-  
   try {
+    const { question } = await request.json();
     const searchQuery = await getSearchQuery(question);
     const searchResults = await braveWebSearch(searchQuery);
     
     return NextResponse.json({ searchQuery, searchResults });
   } catch (error) {
+    console.error('Error in generate-query:', error);
     return NextResponse.json({ error: (error as Error).message }, { status: 500 });
   }
 }

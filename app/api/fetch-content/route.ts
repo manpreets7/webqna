@@ -1,10 +1,12 @@
 import { NextResponse } from 'next/server';
 import axios from 'axios';
+import * as cheerio from 'cheerio';
 
 async function fetchUrlContent(url: string) {
   try {
     const response = await axios.get(url, { timeout: 5000 });
-    return response.data;
+    const $ = cheerio.load(response.data);
+    return $('body').text();
   } catch {
     return "";
   }
@@ -20,12 +22,12 @@ async function getContext(searchResults: any) {
 }
 
 export async function POST(request: Request) {
-  const { searchResults } = await request.json();
-  
   try {
+    const { searchResults } = await request.json();
     const context = await getContext(searchResults);
     return NextResponse.json({ context });
   } catch (error) {
+    console.error('Error in fetch-content:', error);
     return NextResponse.json({ error: (error as Error).message }, { status: 500 });
   }
 }

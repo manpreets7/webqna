@@ -6,11 +6,10 @@ const anthropicClient = new Anthropic({
 });
 
 export async function POST(request: Request) {
-  const { question, context } = await request.json();
-  
   const stream = new ReadableStream({
     async start(controller) {
       try {
+        const { question, context } = await request.json();
         const messageStream = await anthropicClient.messages.stream({
           model: "claude-3-5-sonnet-20240620",
           max_tokens: 1000,
@@ -24,16 +23,13 @@ export async function POST(request: Request) {
         });
 
         for await (const chunk of messageStream) {
-          if (chunk.type === 'content_block_delta') {
-            if ('text' in chunk.delta) {
-              controller.enqueue(chunk.delta.text);
-            } else if ('input_json' in chunk.delta) {
-              controller.enqueue(JSON.stringify(chunk.delta.input_json));
-            }
+          if (chunk.type === 'content_block_delta' && chunk.delta.type === 'text_delta') {
+            controller.enqueue(chunk.delta.text);
           }
         }
       } catch (error) {
-        controller.enqueue(`Error: ${(error as Error).message}\n`);
+        console.error('Error in generate-answer:', error);
+        controller.enqueue(`Error: ${(error as Error).message}`);
       } finally {
         controller.close();
       }

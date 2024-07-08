@@ -28,7 +28,9 @@ export default function Home() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question }),
       });
-      const { searchQuery, searchResults } = await queryResponse.json();
+      const queryData = await queryResponse.json();
+      if (queryData.error) throw new Error(queryData.error);
+      const { searchQuery, searchResults } = queryData;
 
       // Step 2: Fetch and aggregate content
       setStatus('Fetching and aggregating content...');
@@ -37,7 +39,9 @@ export default function Home() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ searchResults }),
       });
-      const { context } = await contentResponse.json();
+      const contentData = await contentResponse.json();
+      if (contentData.error) throw new Error(contentData.error);
+      const { context } = contentData;
 
       // Step 3: Generate answer
       setStatus('Generating answer...');
@@ -62,19 +66,11 @@ export default function Home() {
       }
     } catch (error) {
       console.error('Error:', error);
-      setAnswer('An error occurred while fetching the answer.');
+      setAnswer(`An error occurred: ${(error as Error).message}`);
     } finally {
       setIsLoading(false);
       setStatus('');
     }
-  };
-
-  const formatAnswer = (text: string) => {
-    return text.split('\n').map((line, index) => (
-      <p key={index} className="mb-2">
-        {line}
-      </p>
-    ));
   };
 
   return (
@@ -110,7 +106,7 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-medium mb-2">Answer:</h3>
               <div className="text-gray-700 whitespace-pre-wrap">
-                {formatAnswer(answer)}
+                {answer}
               </div>
             </div>
           )}
