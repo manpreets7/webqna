@@ -13,13 +13,16 @@ async function fetchUrlContent(url: string) {
 }
 
 async function getContext(searchResults: any) {
-  const urls = searchResults.web?.results?.map((result: any) => result.url) || [];
-  let context = "";
-  for (const url of urls) {
-    context += await fetchUrlContent(url) + "\n\n";
+    const urls = searchResults.web?.results?.map((result: any) => result.url) || [];
+    let context = "";
+    for (const url of urls) {
+      context += await fetchUrlContent(url) + "\n\n";
+      if (context.length > 25000) {  // Adjust this number as needed
+        break;
+      }
+    }
+    return context.slice(0, 25000);  // Ensure we don't exceed the limit
   }
-  return context.slice(0, 25000);
-}
 
 export async function POST(request: Request) {
   try {
