@@ -18,7 +18,7 @@ async function getContext(searchResults: any) {
   for (const url of urls) {
     context += await fetchUrlContent(url) + "\n\n";
   }
-  return context.slice(0, 100000);
+  return context.slice(0, 25000);
 }
 
 export async function POST(request: Request) {
