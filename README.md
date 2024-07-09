@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Web Q&A
 
-## Getting Started
+Web Q&A is an LLM-based tool that searches the web and provides answers to your questions. It is powered by Claude Sonnet 3.5 and Brave Search API.
 
-First, run the development server:
+## Table of Contents
+
+- [How It Works](#how-it-works)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Speed](#speed)
+- [Technologies Used](#technologies-used)
+- [Contributing](#contributing)
+- [License](#license)
+
+## How It Works
+
+1. Given a user question, it first prompts the LLM to generate an appropriate web query.
+2. It uses the web query to search the web using the Brave Search API.
+3. It fetches the top 10 URLs from the search and aggregates the content (truncated to a specified context size).
+4. It then asks the LLM to answer the question given the search context.
+5. As a last step, the answer is streamed back to the user.
+
+## Features
+
+- Web search integration with Brave Search API
+- AI-powered query generation and answer synthesis
+- Real-time answer streaming
+- Configurable context size for optimized performance
+
+## Installation
 
 ```bash
+git clone https://github.com/yourusername/web-qna.git
+cd web-qna
+npm install
+
+## Usage
+
+1. Set up your environment variables in .env.local:
+ANTHROPIC_API_KEY=your_anthropic_api_key
+BRAVE_API_KEY=your_brave_search_api_key
+
+2. Run the development server:
+```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Speed
+Even though there are several steps involved, the app is quite responsive and performs fast, providing a seamless user experience.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technologies Used
+Anthropic's Claude API
+Next.js
+TypeScript
+Brave Search API
+Tailwind CSS
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Contributing
+Contributions are welcome!
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This README provides a comprehensive overview of your project, including how it works, installation instructions, usage guidelines, and other important information. You can further customize it by adding more specific details about your project, such as:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Screenshots or GIFs demonstrating the app in action
+- More detailed setup instructions if needed
+- Information about configuration options
+- Known limitations or future improvements
+- A section on how to report issues or request features
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Remember to create a LICENSE file in your repository if you haven't already, and c
