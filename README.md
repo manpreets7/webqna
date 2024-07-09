@@ -34,40 +34,38 @@ Web Q&A is an LLM-based tool that searches the web and provides answers to your 
 git clone https://github.com/yourusername/web-qna.git
 cd web-qna
 npm install
+```
 
 ## Usage
 
 1. Set up your environment variables in .env.local:
+```
 ANTHROPIC_API_KEY=your_anthropic_api_key
 BRAVE_API_KEY=your_brave_search_api_key
+```
 
 2. Run the development server:
 ```bash
 npm run dev
+```
+
+3. Open your browser and navigate to `http://localhost:3000`
 
 ## Speed
+
 Even though there are several steps involved, the app is quite responsive and performs fast, providing a seamless user experience.
 
 ## Technologies Used
-Anthropic's Claude API
-Next.js
-TypeScript
-Brave Search API
-Tailwind CSS
++ Anthropic's Claude API
++ Next.js
++ TypeScript
++ Brave Search API
++ Tailwind CSS
 
 ## Contributing
+
 Contributions are welcome!
 
-
 ## License
+
 This project is licensed under the MIT License - see the LICENSE file for details.
-
-This README provides a comprehensive overview of your project, including how it works, installation instructions, usage guidelines, and other important information. You can further customize it by adding more specific details about your project, such as:
-
-- Screenshots or GIFs demonstrating the app in action
-- More detailed setup instructions if needed
-- Information about configuration options
-- Known limitations or future improvements
-- A section on how to report issues or request features
-
-Remember to create a LICENSE file in your repository if you haven't already, and c
