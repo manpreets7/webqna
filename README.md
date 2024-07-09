@@ -1,6 +1,6 @@
 # Web Q&A
 
-Web Q&A is an LLM-based tool that searches the web and provides answers to your questions. It is powered by Claude Sonnet 3.5 and Brave Search API.
+Web Q&A is an LLM-powered service that searches the web, analyzes the information and provides long-form answers to your questions. It is powered by Claude Sonnet 3.5 and Brave Search API.
 
 ## Table of Contents
 
@@ -15,7 +15,8 @@ Web Q&A is an LLM-based tool that searches the web and provides answers to your 
 
 ## How It Works
 
-1. Given a user question, it first prompts the LLM to generate an appropriate web query.
+0. You can submit a question or a search string that needs a long form answer.
+1. Given a user question or query, it first prompts the LLM to generate an appropriate web query.
 2. It uses the web query to search the web using the Brave Search API.
 3. It fetches the top 10 URLs from the search and aggregates the content (truncated to a specified context size).
 4. It then asks the LLM to answer the question given the search context.
