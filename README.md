@@ -4,6 +4,7 @@ Web Q&A is an LLM-powered service that searches the web, analyzes the informatio
 
 ## Table of Contents
 
+- [Example Questions To Try](#example-questions-to-try)
 - [How It Works](#how-it-works)
 - [Features](#features)
 - [Installation](#installation)
@@ -12,6 +13,12 @@ Web Q&A is an LLM-powered service that searches the web, analyzes the informatio
 - [Technologies Used](#technologies-used)
 - [Contributing](#contributing)
 - [License](#license)
+
+## Example questions to try
+
+1. What are the major events happening in Los Angeles today?
+2. What was the election outcome in the UK?
+3. Compare stock market performance of Nvidia and Apple for the past year with key financial ratios
 
 ## How It Works
 
